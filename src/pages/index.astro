@@ -1,0 +1,263 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import { getFeaturedProducts } from '../data/products';
+import { categories } from '../data/categories';
+import { getFeaturedPosts, posts } from '../data/posts';
+
+const featured = getFeaturedProducts().slice(0, 6);
+const magazinePosts = posts.slice(0, 3);
+
+const slides = [
+  {
+    image: 'https://images.unsplash.com/photo-1661254601903-0edfe1cd736c?w=1600&h=900&fit=crop&crop=faces,center&q=85',
+    eyebrow: 'New Collection 2025',
+    heading: 'Modest.\nMinimal.\nTimeless.',
+    sub: 'Temukan keindahan dalam kesederhanaan.',
+    cta: { label: 'Shop Now', href: '/products' },
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1613611864136-0ace2a3b9926?w=1600&h=900&fit=crop&crop=faces,center&q=85',
+    eyebrow: 'Koleksi Instan',
+    heading: 'Praktis.\nCepat.\nSempurna.',
+    sub: 'Hijab instan untuk semua momen.',
+    cta: { label: 'Lihat Koleksi', href: '/products?category=instan' },
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1626497361649-81cc097e9bfd?w=1600&h=900&fit=crop&crop=faces,center&q=85',
+    eyebrow: 'Koleksi Pashmina',
+    heading: 'Elegan\ndi Setiap\nMomen.',
+    sub: 'Pashmina premium untuk tampilan terbaik.',
+    cta: { label: 'Lihat Koleksi', href: '/products?category=pashmina' },
+  },
+];
+---
+
+<BaseLayout title="Home">
+  <!-- Hero Carousel -->
+  <section class="relative w-full overflow-hidden" style="height: 65vh; min-height: 400px; max-height: 600px;">
+    <!-- Slides -->
+    <div id="carousel-track" class="flex h-full transition-transform duration-700 ease-in-out will-change-transform">
+      {slides.map((slide, i) => (
+        <div class="relative shrink-0 w-full h-full">
+          <img
+            src={slide.image}
+            alt={slide.eyebrow}
+            class="absolute inset-0 h-full w-full object-cover"
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+          <!-- Gradient overlay -->
+          <div class="absolute inset-0 bg-gradient-to-r from-neutral-950/65 via-neutral-950/30 to-transparent" />
+          <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent" />
+
+          <!-- Slide content -->
+          <div class="absolute inset-0 flex items-center justify-start px-8 sm:px-16 lg:px-24" style="padding-top: clamp(3rem, 8vh, 6rem); padding-bottom: clamp(3rem, 8vh, 6rem);">
+            <div class="max-w-xl">
+              <p class="text-[10px] tracking-[0.45em] uppercase text-white/60 mb-4">
+                {slide.eyebrow}
+              </p>
+              <h2 class="text-4xl sm:text-5xl lg:text-5xl font-light tracking-wide text-white mb-5 whitespace-pre-line leading-snug">
+                {slide.heading}
+              </h2>
+              <p class="text-sm tracking-wide text-white/70 mb-8 max-w-xs">
+                {slide.sub}
+              </p>
+              <a
+                href={slide.cta.href}
+                class="inline-block border border-white px-10 py-3.5 text-xs tracking-[0.3em] uppercase text-white transition-all duration-300 hover:bg-white hover:text-neutral-950"
+              >
+                {slide.cta.label}
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Arrow: Prev -->
+    <button
+      id="carousel-prev"
+      aria-label="Slide sebelumnya"
+      class="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center border border-white/40 text-white/80 transition-all hover:border-white hover:text-white hover:bg-white/10 sm:left-6"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <!-- Arrow: Next -->
+    <button
+      id="carousel-next"
+      aria-label="Slide berikutnya"
+      class="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex h-10 w-10 items-center justify-center border border-white/40 text-white/80 transition-all hover:border-white hover:text-white hover:bg-white/10 sm:right-6"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+
+    <!-- Dot indicators -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+      {slides.map((_, i) => (
+        <button
+          class="dot-btn h-[2px] bg-white/40 transition-all duration-500"
+          data-index={i}
+          aria-label={`Slide ${i + 1}`}
+          style={i === 0 ? 'width: 32px; opacity: 1;' : 'width: 16px; opacity: 0.4;'}
+        />
+      ))}
+    </div>
+
+    <!-- Slide counter -->
+    <div class="absolute bottom-8 right-8 z-20 text-[10px] tracking-widest text-white/50">
+      <span id="slide-current">01</span>
+      <span class="mx-1">/</span>
+      <span>{String(slides.length).padStart(2, '0')}</span>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="bg-white py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 text-center">
+        <p class="text-[10px] tracking-[0.4em] uppercase text-neutral-400 mb-2">Pilihan Kami</p>
+        <h2 class="text-2xl font-light tracking-[0.2em] uppercase text-neutral-950">
+          Featured
+        </h2>
+      </div>
+      <div class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
+        {featured.map((product) => <ProductCard product={product} />)}
+      </div>
+      <div class="mt-12 text-center">
+        <a
+          href="/products"
+          class="text-xs tracking-widest uppercase text-neutral-600 border-b border-neutral-600 pb-0.5 hover:text-neutral-950 hover:border-neutral-950 transition-colors"
+        >
+          Lihat Semua Produk
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-12 text-center">
+        <p class="text-[10px] tracking-[0.4em] uppercase text-neutral-400 mb-2">Koleksi</p>
+        <h2 class="text-2xl font-light tracking-[0.2em] uppercase text-neutral-950">
+          Shop by Category
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {categories.map((cat) => <CategoryCard category={cat} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Magazine Preview -->
+  <section class="py-20 px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-12 flex items-end justify-between">
+        <div>
+          <p class="text-[10px] tracking-[0.4em] uppercase text-neutral-400 mb-2">From the</p>
+          <h2 class="text-2xl font-light tracking-[0.2em] uppercase text-neutral-950">Magazine</h2>
+        </div>
+        <a
+          href="/magazine"
+          class="text-xs tracking-widest uppercase text-neutral-600 border-b border-neutral-300 pb-0.5 hover:text-neutral-950 hover:border-neutral-950 transition-colors"
+        >
+          Semua Artikel
+        </a>
+      </div>
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+        {magazinePosts.map((post, i) => (
+          <a href={`/magazine/${post.slug}`} class="group block">
+            <div class="overflow-hidden bg-neutral-100 aspect-[3/2] mb-5">
+              <img
+                src={post.image}
+                alt={post.title}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <span class="text-[9px] tracking-[0.3em] uppercase text-neutral-400 border border-neutral-200 px-2 py-0.5">
+              {post.category}
+            </span>
+            <h3 class="mt-3 text-sm font-medium text-neutral-950 leading-snug group-hover:text-neutral-500 transition-colors">
+              {post.title}
+            </h3>
+            <p class="mt-2 text-xs text-neutral-500 leading-relaxed line-clamp-2">
+              {post.excerpt}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Strip -->
+  <section class="bg-neutral-950 py-16 text-center">
+    <p class="text-[10px] tracking-[0.4em] uppercase text-neutral-500 mb-3">
+      Tentang Hara
+    </p>
+    <p class="max-w-md mx-auto text-sm font-light text-neutral-300 leading-relaxed px-4">
+      Kami percaya bahwa keindahan sejati hadir dari kesederhanaan. Setiap produk Hara
+      dirancang dengan bahan terbaik, untuk wanita yang menghargai kualitas dan ketenangan
+      dalam berpakaian.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  const TOTAL = 3;
+  const INTERVAL = 5000;
+
+  const track = document.getElementById('carousel-track') as HTMLElement;
+  const prevBtn = document.getElementById('carousel-prev')!;
+  const nextBtn = document.getElementById('carousel-next')!;
+  const dots = document.querySelectorAll<HTMLButtonElement>('.dot-btn');
+  const counter = document.getElementById('slide-current')!;
+
+  let current = 0;
+  let timer: ReturnType<typeof setInterval>;
+
+  function goTo(index: number) {
+    current = (index + TOTAL) % TOTAL;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    counter.textContent = String(current + 1).padStart(2, '0');
+    dots.forEach((dot, i) => {
+      dot.style.width = i === current ? '32px' : '16px';
+      dot.style.opacity = i === current ? '1' : '0.4';
+    });
+  }
+
+  function startTimer() {
+    timer = setInterval(() => goTo(current + 1), INTERVAL);
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    startTimer();
+  }
+
+  prevBtn.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+  nextBtn.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => { goTo(i); resetTimer(); });
+  });
+
+  // Pause on hover
+  track.parentElement?.addEventListener('mouseenter', () => clearInterval(timer));
+  track.parentElement?.addEventListener('mouseleave', startTimer);
+
+  // Touch / swipe support
+  let touchStartX = 0;
+  track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', (e) => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); resetTimer(); }
+  });
+
+  startTimer();
+</script>

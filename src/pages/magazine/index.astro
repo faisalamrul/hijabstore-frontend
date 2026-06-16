@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { posts } from '../../data/posts';
+import type { Post } from '../../types/post';
+
+const featured = posts.filter((p) => p.isFeatured)[0];
+const rest = posts.filter((p) => p.id !== featured.id);
+
+const categories: Post['category'][] = ['Style', 'Tutorial', 'Trend', 'Tips'];
+
+function formatDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+}
+---
+
+<BaseLayout title="Magazine" description="Inspirasi gaya, tutorial hijab, dan tren modest fashion dari Hara.">
+  <!-- Page header -->
+  <div class="border-b border-neutral-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 text-center">
+      <p class="text-[10px] tracking-[0.45em] uppercase text-neutral-400 mb-2">Hara</p>
+      <h1 class="text-4xl font-light tracking-[0.25em] uppercase text-neutral-950">Magazine</h1>
+      <p class="mt-3 text-sm text-neutral-500">Inspirasi gaya, tutorial, dan cerita dari dunia modest fashion.</p>
+    </div>
+
+    <!-- Category tabs -->
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-0 overflow-x-auto pb-0 scrollbar-hide" id="cat-tabs">
+        <button
+          data-cat="all"
+          class="cat-tab shrink-0 border-b-2 border-neutral-950 px-5 py-3 text-[10px] tracking-widest uppercase text-neutral-950 transition-colors"
+        >
+          Semua
+        </button>
+        {categories.map((cat) => (
+          <button
+            data-cat={cat}
+            class="cat-tab shrink-0 border-b-2 border-transparent px-5 py-3 text-[10px] tracking-widest uppercase text-neutral-400 hover:text-neutral-950 transition-colors"
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <!-- Featured Article -->
+    <article
+      class="post-item mb-16 group"
+      data-cat={featured.category}
+    >
+      <a href={`/magazine/${featured.slug}`} class="grid grid-cols-1 gap-0 lg:grid-cols-2">
+        <div class="overflow-hidden bg-neutral-100 aspect-[4/3] lg:aspect-auto">
+          <img
+            src={featured.image}
+            alt={featured.title}
+            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="eager"
+          />
+        </div>
+        <div class="flex flex-col justify-center bg-neutral-950 p-10 lg:p-14">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="text-[9px] tracking-[0.35em] uppercase text-neutral-400 border border-neutral-700 px-2.5 py-1">
+              {featured.category}
+            </span>
+            <span class="text-[9px] tracking-widest uppercase text-neutral-600">
+              Featured
+            </span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-light tracking-wide text-white leading-snug mb-5 group-hover:text-neutral-300 transition-colors">
+            {featured.title}
+          </h2>
+          <p class="text-sm leading-relaxed text-neutral-400 mb-8">
+            {featured.excerpt}
+          </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3 text-[10px] tracking-widest uppercase text-neutral-600">
+              <span>{formatDate(featured.publishedAt)}</span>
+              <span>·</span>
+              <span>{featured.readTime} min read</span>
+            </div>
+            <span class="text-[10px] tracking-widest uppercase text-white border-b border-white/30 pb-0.5 group-hover:border-white transition-colors">
+              Baca →
+            </span>
+          </div>
+        </div>
+      </a>
+    </article>
+
+    <!-- Article Grid -->
+    <div id="post-grid" class="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+      {rest.map((post) => (
+        <article class="post-item group" data-cat={post.category}>
+          <a href={`/magazine/${post.slug}`} class="block">
+            <!-- Image -->
+            <div class="overflow-hidden bg-neutral-100 aspect-[3/2] mb-5">
+              <img
+                src={post.image}
+                alt={post.title}
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <!-- Meta -->
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-[9px] tracking-[0.3em] uppercase text-neutral-400 border border-neutral-200 px-2 py-0.5">
+                {post.category}
+              </span>
+              <span class="text-[9px] text-neutral-400">{post.readTime} min read</span>
+            </div>
+            <!-- Title -->
+            <h2 class="text-base font-medium text-neutral-950 leading-snug mb-2 group-hover:text-neutral-600 transition-colors">
+              {post.title}
+            </h2>
+            <!-- Excerpt -->
+            <p class="text-sm text-neutral-500 leading-relaxed line-clamp-2">
+              {post.excerpt}
+            </p>
+            <!-- Date -->
+            <p class="mt-4 text-[10px] tracking-widest uppercase text-neutral-400">
+              {formatDate(post.publishedAt)}
+            </p>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden py-24 text-center">
+      <p class="text-sm text-neutral-400 tracking-widest uppercase">Tidak ada artikel ditemukan</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.cat-tab');
+  const items = document.querySelectorAll<HTMLElement>('.post-item');
+  const empty = document.getElementById('empty-state')!;
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const cat = tab.dataset.cat ?? 'all';
+
+      tabs.forEach((t) => {
+        t.classList.remove('border-neutral-950', 'text-neutral-950');
+        t.classList.add('border-transparent', 'text-neutral-400');
+      });
+      tab.classList.add('border-neutral-950', 'text-neutral-950');
+      tab.classList.remove('border-transparent', 'text-neutral-400');
+
+      let visible = 0;
+      items.forEach((item) => {
+        const match = cat === 'all' || item.dataset.cat === cat;
+        item.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      empty.classList.toggle('hidden', visible > 0);
+    });
+  });
+</script>

@@ -1,0 +1,33 @@
+---
+import type { Category } from '../types/product';
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+---
+
+<a
+  href={`/products?category=${category.slug}`}
+  class="group relative block overflow-hidden aspect-[3/4]"
+>
+  <img
+    src={category.image}
+    alt={category.name}
+    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+    loading="lazy"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/10 to-transparent" />
+  <div class="absolute bottom-0 left-0 p-6">
+    <p class="text-[10px] tracking-widest uppercase text-neutral-300 mb-1">
+      {category.description}
+    </p>
+    <h3 class="text-xl font-light tracking-[0.2em] uppercase text-white">
+      {category.name}
+    </h3>
+    <span class="mt-2 inline-block text-[10px] tracking-widest uppercase text-neutral-300 border-b border-neutral-300 pb-0.5 transition-all group-hover:text-white group-hover:border-white">
+      Lihat Koleksi →
+    </span>
+  </div>
+</a>
