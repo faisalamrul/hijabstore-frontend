@@ -15,28 +15,33 @@ const allProducts = products;
     </div>
 
     <!-- Filter & Sort bar -->
-    <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-      <!-- Category filters -->
-      <div class="flex flex-wrap gap-2" id="filter-buttons">
-        {['Semua', 'Instan', 'Pashmina', 'Bergo'].map((cat) => (
-          <button
-            data-filter={cat === 'Semua' ? 'all' : cat.toLowerCase()}
-            class="filter-btn border border-neutral-200 px-4 py-1.5 text-xs tracking-widest uppercase text-neutral-600 transition-all hover:border-neutral-950 hover:text-neutral-950 data-[active]:bg-neutral-950 data-[active]:text-white data-[active]:border-neutral-950"
-          >
-            {cat}
-          </button>
-        ))}
+    <div class="mb-8 flex flex-col gap-3">
+      <!-- Category filters — horizontal scroll on mobile -->
+      <div class="-mx-4 sm:mx-0">
+        <div class="flex gap-2 overflow-x-auto px-4 pb-1 sm:px-0 sm:flex-wrap" id="filter-buttons"
+          style="scrollbar-width: none; -ms-overflow-style: none;">
+          {['Semua', 'Instan', 'Pashmina', 'Bergo'].map((cat) => (
+            <button
+              data-filter={cat === 'Semua' ? 'all' : cat.toLowerCase()}
+              class="filter-btn shrink-0 border border-neutral-200 px-5 py-2 text-[11px] tracking-widest uppercase text-neutral-600 transition-all hover:border-neutral-950 hover:text-neutral-950 data-[active]:bg-neutral-950 data-[active]:text-white data-[active]:border-neutral-950"
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </div>
 
       <!-- Sort -->
-      <select
-        id="sort-select"
-        class="border border-neutral-200 px-3 py-1.5 text-xs tracking-widest uppercase text-neutral-600 bg-white focus:outline-none focus:border-neutral-950 cursor-pointer"
-      >
-        <option value="default">Terbaru</option>
-        <option value="price-asc">Harga Terendah</option>
-        <option value="price-desc">Harga Tertinggi</option>
-      </select>
+      <div class="flex items-center justify-end">
+        <select
+          id="sort-select"
+          class="border border-neutral-200 px-3 py-2 text-[11px] tracking-widest uppercase text-neutral-600 bg-white focus:outline-none focus:border-neutral-950 cursor-pointer"
+        >
+          <option value="default">Terbaru</option>
+          <option value="price-asc">Harga Terendah</option>
+          <option value="price-desc">Harga Tertinggi</option>
+        </select>
+      </div>
     </div>
 
     <!-- Product grid -->
