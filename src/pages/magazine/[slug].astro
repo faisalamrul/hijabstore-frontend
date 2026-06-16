@@ -24,14 +24,6 @@ function formatDate(iso: string): string {
   });
 }
 
-const categoryColors: Record<Post['category'], string> = {
-  Style: 'border-neutral-950 text-neutral-950',
-  Tutorial: 'border-neutral-950 text-neutral-950',
-  Trend: 'border-neutral-950 text-neutral-950',
-  Tips: 'border-neutral-950 text-neutral-950',
-};
-
-// Simple markdown-like parser: ## → h2, **text** → bold, paragraph breaks
 function renderContent(raw: string): string {
   return raw
     .trim()
@@ -51,78 +43,86 @@ const htmlContent = renderContent(post.content);
 ---
 
 <BaseLayout title={post.title} description={post.excerpt}>
-  <!-- Hero image -->
-  <div class="w-full bg-neutral-100 aspect-[16/7] overflow-hidden">
-    <img
-      src={post.image}
-      alt={post.title}
-      class="h-full w-full object-cover"
-      loading="eager"
-    />
-  </div>
-
-  <!-- Article -->
-  <article class="mx-auto max-w-2xl px-4 py-14 sm:px-6">
-    <!-- Breadcrumb -->
-    <nav class="mb-8 flex items-center gap-2 text-[10px] tracking-widest uppercase text-neutral-400">
+  <!-- Breadcrumb -->
+  <div class="mx-auto max-w-7xl px-4 pt-6 pb-2 sm:px-6 lg:px-8">
+    <nav class="flex items-center gap-2 text-[10px] tracking-widest uppercase text-neutral-400">
       <a href={url('/')} class="hover:text-neutral-950 transition-colors">Home</a>
       <span>/</span>
       <a href={url('/magazine')} class="hover:text-neutral-950 transition-colors">Magazine</a>
       <span>/</span>
       <span class="text-neutral-950 truncate max-w-[180px]">{post.category}</span>
     </nav>
+  </div>
 
-    <!-- Category + meta -->
-    <div class="flex flex-wrap items-center gap-3 mb-6">
-      <span class={`text-[9px] tracking-[0.3em] uppercase border px-2.5 py-1 ${categoryColors[post.category]}`}>
-        {post.category}
-      </span>
-      <span class="text-[10px] tracking-widest uppercase text-neutral-400">
-        {formatDate(post.publishedAt)}
-      </span>
-      <span class="text-neutral-300">·</span>
-      <span class="text-[10px] tracking-widest uppercase text-neutral-400">
-        {post.readTime} min read
-      </span>
-    </div>
+  <!-- Two-column layout -->
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16 lg:items-start">
 
-    <!-- Title -->
-    <h1 class="text-3xl sm:text-4xl font-light tracking-wide text-neutral-950 leading-tight mb-6">
-      {post.title}
-    </h1>
-
-    <!-- Excerpt / lead -->
-    <p class="text-base text-neutral-600 leading-relaxed border-l-2 border-neutral-200 pl-5 mb-10 italic">
-      {post.excerpt}
-    </p>
-
-    <!-- Author -->
-    <div class="flex items-center gap-3 mb-10 pb-10 border-b border-neutral-100">
-      <div class="h-8 w-8 rounded-full bg-neutral-950 flex items-center justify-center">
-        <span class="text-[10px] font-medium text-white">H</span>
+      <!-- LEFT: Image — sticky on desktop -->
+      <div class="lg:sticky lg:top-24">
+        <div class="overflow-hidden bg-neutral-100 aspect-[4/5] w-full">
+          <img
+            src={post.image}
+            alt={post.title}
+            class="h-full w-full object-cover"
+            loading="eager"
+          />
+        </div>
+        <!-- Caption / category pill under image -->
+        <div class="mt-4 flex items-center gap-3">
+          <span class="text-[9px] tracking-[0.35em] uppercase border border-neutral-950 px-2.5 py-1 text-neutral-950">
+            {post.category}
+          </span>
+          <span class="text-[10px] tracking-widest uppercase text-neutral-400">
+            {post.readTime} min read
+          </span>
+        </div>
       </div>
-      <div>
-        <p class="text-xs font-medium text-neutral-950">{post.author}</p>
-        <p class="text-[10px] text-neutral-400 tracking-widest uppercase">Hara Magazine</p>
-      </div>
-    </div>
 
-    <!-- Body content -->
-    <div
-      class="prose-hara"
-      set:html={htmlContent}
-    />
+      <!-- RIGHT: Article content -->
+      <article class="min-w-0">
+        <!-- Meta -->
+        <p class="text-[10px] tracking-[0.4em] uppercase text-neutral-400 mb-4">
+          {formatDate(post.publishedAt)}
+        </p>
 
-    <!-- Divider -->
-    <div class="mt-14 pt-10 border-t border-neutral-100">
-      <a
-        href={url('/magazine')}
-        class="text-xs tracking-widest uppercase text-neutral-600 border-b border-neutral-300 pb-0.5 hover:text-neutral-950 hover:border-neutral-950 transition-colors"
-      >
-        ← Kembali ke Magazine
-      </a>
+        <!-- Title -->
+        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-light tracking-wide text-neutral-950 leading-snug mb-6">
+          {post.title}
+        </h1>
+
+        <!-- Excerpt / lead -->
+        <p class="text-base text-neutral-600 leading-relaxed border-l-2 border-neutral-200 pl-5 mb-8 italic">
+          {post.excerpt}
+        </p>
+
+        <!-- Author -->
+        <div class="flex items-center gap-3 mb-8 pb-8 border-b border-neutral-100">
+          <div class="h-8 w-8 rounded-full bg-neutral-950 flex items-center justify-center shrink-0">
+            <span class="text-[10px] font-medium text-white">H</span>
+          </div>
+          <div>
+            <p class="text-xs font-medium text-neutral-950">{post.author}</p>
+            <p class="text-[10px] text-neutral-400 tracking-widest uppercase">Hara Magazine</p>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="prose-hara" set:html={htmlContent} />
+
+        <!-- Back link -->
+        <div class="mt-12 pt-8 border-t border-neutral-100">
+          <a
+            href={url('/magazine')}
+            class="text-xs tracking-widest uppercase text-neutral-600 border-b border-neutral-300 pb-0.5 hover:text-neutral-950 hover:border-neutral-950 transition-colors"
+          >
+            ← Kembali ke Magazine
+          </a>
+        </div>
+      </article>
+
     </div>
-  </article>
+  </div>
 
   <!-- Related articles -->
   {related.length > 0 && (
