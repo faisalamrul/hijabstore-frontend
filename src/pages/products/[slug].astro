@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { products, getProductBySlug, getProductsByCategory } from '../../data/products';
+import { url } from '../../lib/url';
 
 export function getStaticPaths() {
   return products.map((p) => ({ params: { slug: p.slug } }));
@@ -10,7 +11,7 @@ export function getStaticPaths() {
 const { slug } = Astro.params;
 const product = getProductBySlug(slug);
 
-if (!product) return Astro.redirect('/products');
+if (!product) return Astro.redirect(url('/products'));
 
 const related = getProductsByCategory(product.category)
   .filter((p) => p.id !== product.id)
@@ -37,9 +38,9 @@ const whatsappUrl = 'https://wa.me/6281234567890';
   <!-- Breadcrumb -->
   <div class="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
     <nav class="flex items-center gap-2 text-[10px] tracking-widest uppercase text-neutral-400">
-      <a href="/" class="hover:text-neutral-950 transition-colors">Home</a>
+      <a href={url('/')} class="hover:text-neutral-950 transition-colors">Home</a>
       <span>/</span>
-      <a href="/products" class="hover:text-neutral-950 transition-colors">Produk</a>
+      <a href={url('/products')} class="hover:text-neutral-950 transition-colors">Produk</a>
       <span>/</span>
       <span class="text-neutral-950">{product.name}</span>
     </nav>
@@ -83,7 +84,7 @@ const whatsappUrl = 'https://wa.me/6281234567890';
         <!-- Category + badges -->
         <div class="flex items-center gap-3">
           <a
-            href={`/products?category=${product.category}`}
+            href={url(`/products?category=${product.category}`)}
             class="text-[10px] tracking-widest uppercase text-neutral-400 hover:text-neutral-950 transition-colors"
           >
             {categoryLabel[product.category]}

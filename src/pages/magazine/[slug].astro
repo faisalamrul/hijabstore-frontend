@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { posts, getPostBySlug } from '../../data/posts';
 import type { Post } from '../../types/post';
+import { url } from '../../lib/url';
 
 export function getStaticPaths() {
   return posts.map((p) => ({ params: { slug: p.slug } }));
@@ -9,7 +10,7 @@ export function getStaticPaths() {
 
 const { slug } = Astro.params;
 const post = getPostBySlug(slug);
-if (!post) return Astro.redirect('/magazine');
+if (!post) return Astro.redirect(url('/magazine'));
 
 const related = posts
   .filter((p) => p.category === post.category && p.id !== post.id)
@@ -64,9 +65,9 @@ const htmlContent = renderContent(post.content);
   <article class="mx-auto max-w-2xl px-4 py-14 sm:px-6">
     <!-- Breadcrumb -->
     <nav class="mb-8 flex items-center gap-2 text-[10px] tracking-widest uppercase text-neutral-400">
-      <a href="/" class="hover:text-neutral-950 transition-colors">Home</a>
+      <a href={url('/')} class="hover:text-neutral-950 transition-colors">Home</a>
       <span>/</span>
-      <a href="/magazine" class="hover:text-neutral-950 transition-colors">Magazine</a>
+      <a href={url('/magazine')} class="hover:text-neutral-950 transition-colors">Magazine</a>
       <span>/</span>
       <span class="text-neutral-950 truncate max-w-[180px]">{post.category}</span>
     </nav>
@@ -115,7 +116,7 @@ const htmlContent = renderContent(post.content);
     <!-- Divider -->
     <div class="mt-14 pt-10 border-t border-neutral-100">
       <a
-        href="/magazine"
+        href={url('/magazine')}
         class="text-xs tracking-widest uppercase text-neutral-600 border-b border-neutral-300 pb-0.5 hover:text-neutral-950 hover:border-neutral-950 transition-colors"
       >
         ← Kembali ke Magazine
@@ -135,7 +136,7 @@ const htmlContent = renderContent(post.content);
         </div>
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
           {related.map((p) => (
-            <a href={`/magazine/${p.slug}`} class="group block">
+            <a href={url(`/magazine/${p.slug}`)} class="group block">
               <div class="overflow-hidden bg-neutral-100 aspect-[3/2] mb-4">
                 <img
                   src={p.image}

@@ -1,5 +1,6 @@
 ---
 import type { Product } from '../types/product';
+import { url } from '../lib/url';
 
 interface Props {
   product: Product;
@@ -22,7 +23,7 @@ const categoryLabel: Record<Product['category'], string> = {
 };
 ---
 
-<a href={`/products/${product.slug}`} class="group block">
+<a href={url(`/products/${product.slug}`)} class="group block">
   <div class="relative overflow-hidden bg-neutral-100 aspect-[4/5]">
     <img
       src={product.images[0]}

@@ -1,5 +1,6 @@
 ---
 import type { Category } from '../types/product';
+import { url } from '../lib/url';
 
 interface Props {
   category: Category;
@@ -9,7 +10,7 @@ const { category } = Astro.props;
 ---
 
 <a
-  href={`/products?category=${category.slug}`}
+  href={url(`/products?category=${category.slug}`)}
   class="group relative block overflow-hidden aspect-[3/4]"
 >
   <img

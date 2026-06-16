@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { posts } from '../../data/posts';
 import type { Post } from '../../types/post';
+import { url } from '../../lib/url';
 
 const featured = posts.filter((p) => p.isFeatured)[0];
 const rest = posts.filter((p) => p.id !== featured.id);
@@ -53,7 +54,7 @@ function formatDate(iso: string): string {
       class="post-item mb-16 group"
       data-cat={featured.category}
     >
-      <a href={`/magazine/${featured.slug}`} class="grid grid-cols-1 gap-0 lg:grid-cols-2">
+      <a href={url(`/magazine/${featured.slug}`)} class="grid grid-cols-1 gap-0 lg:grid-cols-2">
         <div class="overflow-hidden bg-neutral-100 aspect-[4/3] lg:aspect-auto">
           <img
             src={featured.image}
@@ -95,7 +96,7 @@ function formatDate(iso: string): string {
     <div id="post-grid" class="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
       {rest.map((post) => (
         <article class="post-item group" data-cat={post.category}>
-          <a href={`/magazine/${post.slug}`} class="block">
+          <a href={url(`/magazine/${post.slug}`)} class="block">
             <!-- Image -->
             <div class="overflow-hidden bg-neutral-100 aspect-[3/2] mb-5">
               <img

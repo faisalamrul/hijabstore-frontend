@@ -5,6 +5,7 @@ import CategoryCard from '../components/CategoryCard.astro';
 import { getFeaturedProducts } from '../data/products';
 import { categories } from '../data/categories';
 import { getFeaturedPosts, posts } from '../data/posts';
+import { url } from '../lib/url';
 
 const featured = getFeaturedProducts().slice(0, 6);
 const magazinePosts = posts.slice(0, 3);
@@ -15,21 +16,21 @@ const slides = [
     eyebrow: 'New Collection 2025',
     heading: 'Modest.\nMinimal.\nTimeless.',
     sub: 'Temukan keindahan dalam kesederhanaan.',
-    cta: { label: 'Shop Now', href: '/products' },
+    cta: { label: 'Shop Now', href: url('/products') },
   },
   {
     image: 'https://images.unsplash.com/photo-1613611864136-0ace2a3b9926?w=1600&h=900&fit=crop&crop=faces,center&q=85',
     eyebrow: 'Koleksi Instan',
     heading: 'Praktis.\nCepat.\nSempurna.',
     sub: 'Hijab instan untuk semua momen.',
-    cta: { label: 'Lihat Koleksi', href: '/products?category=instan' },
+    cta: { label: 'Lihat Koleksi', href: url('/products?category=instan') },
   },
   {
     image: 'https://images.unsplash.com/photo-1626497361649-81cc097e9bfd?w=1600&h=900&fit=crop&crop=faces,center&q=85',
     eyebrow: 'Koleksi Pashmina',
     heading: 'Elegan\ndi Setiap\nMomen.',
     sub: 'Pashmina premium untuk tampilan terbaik.',
-    cta: { label: 'Lihat Koleksi', href: '/products?category=pashmina' },
+    cta: { label: 'Lihat Koleksi', href: url('/products?category=pashmina') },
   },
 ];
 ---
@@ -131,7 +132,7 @@ const slides = [
       </div>
       <div class="mt-12 text-center">
         <a
-          href="/products"
+          href={url('/products')}
           class="text-xs tracking-widest uppercase text-neutral-600 border-b border-neutral-600 pb-0.5 hover:text-neutral-950 hover:border-neutral-950 transition-colors"
         >
           Lihat Semua Produk
@@ -164,7 +165,7 @@ const slides = [
           <h2 class="text-2xl font-light tracking-[0.2em] uppercase text-neutral-950">Magazine</h2>
         </div>
         <a
-          href="/magazine"
+          href={url('/magazine')}
           class="text-xs tracking-widest uppercase text-neutral-600 border-b border-neutral-300 pb-0.5 hover:text-neutral-950 hover:border-neutral-950 transition-colors"
         >
           Semua Artikel
@@ -172,7 +173,7 @@ const slides = [
       </div>
       <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
         {magazinePosts.map((post, i) => (
-          <a href={`/magazine/${post.slug}`} class="group block">
+          <a href={url(`/magazine/${post.slug}`)} class="group block">
             <div class="overflow-hidden bg-neutral-100 aspect-[3/2] mb-5">
               <img
                 src={post.image}
