@@ -2,10 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import CategoryCard from '../components/CategoryCard.astro';
+import { Image } from 'astro:assets';
 import { getFeaturedProducts } from '../data/products';
 import { categories } from '../data/categories';
 import { getFeaturedPosts, posts } from '../data/posts';
 import { url } from '../lib/url';
+
+import slide1 from '../../public/images/carousel/slide-1.JPG';
+import slide2 from '../../public/images/carousel/slide-2.JPG';
+import slide3 from '../../public/images/carousel/slide-3.JPG';
 
 const featured = getFeaturedProducts().slice(0, 6);
 const magazinePosts = posts.slice(0, 3);
@@ -28,21 +33,21 @@ const itemListSchema = {
 
 const slides = [
   {
-    image: url('/images/carousel/slide-1.JPG'),
+    image: slide1,
     eyebrow: 'New Collection 2025',
     heading: 'Modest.\nMinimal.\nTimeless.',
     sub: 'Temukan keindahan dalam kesederhanaan.',
     cta: { label: 'Shop Now', href: url('/products') },
   },
   {
-    image: url('/images/carousel/slide-2.JPG'),
+    image: slide2,
     eyebrow: 'Koleksi Instan',
     heading: 'Praktis.\nCepat.\nSempurna.',
     sub: 'Hijab instan untuk semua momen.',
     cta: { label: 'Lihat Koleksi', href: url('/products?category=instan') },
   },
   {
-    image: url('/images/carousel/slide-3.JPG'),
+    image: slide3,
     eyebrow: 'Koleksi Pashmina',
     heading: 'Elegan\ndi Setiap\nMomen.',
     sub: 'Pashmina premium untuk tampilan terbaik.',
@@ -64,11 +69,15 @@ const slides = [
     <div id="carousel-track" class="flex h-full transition-transform duration-700 ease-in-out will-change-transform">
       {slides.map((slide, i) => (
         <div class="relative shrink-0 w-full h-full">
-          <img
+          <Image
             src={slide.image}
             alt={slide.eyebrow}
             class="absolute inset-0 h-full w-full object-cover"
             loading={i === 0 ? 'eager' : 'lazy'}
+            format="webp"
+            quality={82}
+            widths={[800, 1200, 1600]}
+            sizes="100vw"
           />
           <!-- Gradient overlay -->
           <div class="absolute inset-0 bg-gradient-to-r from-neutral-950/65 via-neutral-950/30 to-transparent" />
