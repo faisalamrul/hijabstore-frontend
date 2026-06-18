@@ -1,10 +1,34 @@
 ---
+import { url } from '../lib/url';
 const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-neutral-200 bg-white">
   <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-    <div class="flex flex-col items-center gap-4 text-center">
+    <!-- Quick links -->
+    <div class="mb-12 grid grid-cols-2 gap-8 sm:grid-cols-4">
+      <div>
+        <p class="text-[9px] tracking-[0.4em] uppercase text-neutral-400 mb-4">Koleksi</p>
+        <ul class="space-y-3">
+          <li><a href={url('/koleksi/instan')} class="text-xs text-neutral-600 hover:text-neutral-950 transition-colors">Hijab Instan</a></li>
+          <li><a href={url('/koleksi/pashmina')} class="text-xs text-neutral-600 hover:text-neutral-950 transition-colors">Pashmina</a></li>
+          <li><a href={url('/koleksi/bergo')} class="text-xs text-neutral-600 hover:text-neutral-950 transition-colors">Bergo</a></li>
+          <li><a href={url('/products')} class="text-xs text-neutral-600 hover:text-neutral-950 transition-colors">Semua Produk</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[9px] tracking-[0.4em] uppercase text-neutral-400 mb-4">Informasi</p>
+        <ul class="space-y-3">
+          <li><a href={url('/tentang')} class="text-xs text-neutral-600 hover:text-neutral-950 transition-colors">Tentang Hara</a></li>
+          <li><a href={url('/kontak')} class="text-xs text-neutral-600 hover:text-neutral-950 transition-colors">Hubungi Kami</a></li>
+          <li><a href={url('/panduan-ukuran')} class="text-xs text-neutral-600 hover:text-neutral-950 transition-colors">Panduan Ukuran</a></li>
+          <li><a href={url('/magazine')} class="text-xs text-neutral-600 hover:text-neutral-950 transition-colors">Magazine</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Brand + copyright -->
+    <div class="flex flex-col items-center gap-4 text-center border-t border-neutral-100 pt-8">
       <span class="text-base font-light tracking-[0.4em] uppercase text-neutral-950">Hara</span>
       <p class="text-xs tracking-widest uppercase text-neutral-400">
         Modest. Minimal. Timeless.

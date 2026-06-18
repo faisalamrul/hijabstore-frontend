@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../lib/url';
+
+const siteUrl = 'https://faisalamrul.github.io/hijabstore-frontend';
+
+const howToSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Cara Memilih Ukuran Hijab yang Tepat',
+  description:
+    'Panduan langkah demi langkah untuk memilih ukuran hijab instan, pashmina, dan bergo yang paling sesuai dengan bentuk wajah dan kebutuhan pemakaian.',
+  url: `${siteUrl}/panduan-ukuran`,
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: 'Ukur lingkar kepala',
+      text: 'Gunakan pita ukur dan ukur lingkar kepala di bagian paling lebar — biasanya sekitar 3 cm di atas alis dan melewati bagian belakang kepala yang paling menonjol. Catat ukurannya dalam sentimeter.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: 'Tentukan jenis hijab',
+      text: 'Pilih antara instan (praktis, tidak perlu jarum), pashmina (fleksibel, banyak gaya), atau bergo (one-piece, paling mudah). Pertimbangkan gaya hidup dan kesempatan pemakaian utama.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: 'Cocokkan dengan tabel ukuran',
+      text: 'Gunakan tabel ukuran di bawah untuk menemukan ukuran yang sesuai berdasarkan lingkar kepala dan jenis hijab yang dipilih.',
+    },
+    {
+      '@type': 'HowToStep',
+      position: 4,
+      name: 'Pertimbangkan pilihan bahan',
+      text: 'Bahan yang berbeda memberikan tingkat kelenturan yang berbeda. Jersey dan kaos lebih stretch sehingga satu ukuran bisa cocok untuk berbagai lingkar kepala. Bahan linen dan voile lebih kaku sehingga ukuran perlu lebih presisi.',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Panduan Ukuran Hijab — Instan, Pashmina, Bergo | Hara"
+  description="Panduan lengkap ukuran hijab Hara. Tabel dimensi dan tips memilih ukuran instan, pashmina, dan bergo yang tepat untuk kenyamanan maksimal."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+    <!-- Breadcrumb -->
+    <nav class="mb-10 flex items-center gap-2 text-[10px] tracking-widest uppercase text-neutral-400">
+      <a href={url('/')} class="hover:text-neutral-950 transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-neutral-950">Panduan Ukuran</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-12">
+      <p class="text-[10px] tracking-[0.4em] uppercase text-neutral-400 mb-3">Panduan</p>
+      <h1 class="text-3xl sm:text-4xl font-light tracking-wide text-neutral-950 mb-6">
+        Panduan Ukuran Hijab
+      </h1>
+      <p class="text-base text-neutral-500 leading-relaxed max-w-2xl">
+        Memilih ukuran hijab yang tepat memastikan kenyamanan sepanjang hari. Setiap jenis hijab memiliki karakteristik ukuran yang berbeda — gunakan panduan ini untuk menemukan pilihan terbaik.
+      </p>
+    </div>
+
+    <!-- How to measure -->
+    <div class="mb-14 bg-stone-50 border border-neutral-100 p-6 sm:p-8">
+      <h2 class="text-base font-medium tracking-wide text-neutral-950 mb-5">
+        Cara Mengukur Kepala
+      </h2>
+      <ol class="space-y-4">
+        <li class="flex gap-4">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-neutral-950 text-white text-[10px] flex items-center justify-center font-medium">1</span>
+          <p class="text-sm text-neutral-600 leading-relaxed">Gunakan pita ukur fleksibel, ukur lingkar kepala di bagian paling lebar — sekitar 3 cm di atas alis hingga bagian belakang kepala yang paling menonjol.</p>
+        </li>
+        <li class="flex gap-4">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-neutral-950 text-white text-[10px] flex items-center justify-center font-medium">2</span>
+          <p class="text-sm text-neutral-600 leading-relaxed">Catat ukuran dalam sentimeter. Rata-rata lingkar kepala wanita dewasa adalah 52–58 cm.</p>
+        </li>
+        <li class="flex gap-4">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-neutral-950 text-white text-[10px] flex items-center justify-center font-medium">3</span>
+          <p class="text-sm text-neutral-600 leading-relaxed">Jika berada di antara dua ukuran, pilih yang lebih besar untuk kenyamanan. Bahan yang stretch (jersey, kaos) lebih toleran terhadap perbedaan ukuran.</p>
+        </li>
+        <li class="flex gap-4">
+          <span class="shrink-0 w-6 h-6 rounded-full bg-neutral-950 text-white text-[10px] flex items-center justify-center font-medium">4</span>
+          <p class="text-sm text-neutral-600 leading-relaxed">Cocokkan dengan tabel di bawah berdasarkan jenis hijab yang kamu pilih.</p>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Table: Instan -->
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-lg font-light tracking-wide text-neutral-950">Hijab Instan</h2>
+        <a href={url('/koleksi/instan')} class="text-[10px] tracking-widest uppercase text-neutral-400 border-b border-neutral-200 pb-0.5 hover:text-neutral-950 transition-colors">
+          Lihat Koleksi →
+        </a>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-neutral-200">
+              <th class="text-left py-3 pr-6 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Ukuran</th>
+              <th class="text-left py-3 pr-6 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Lingkar Kepala</th>
+              <th class="text-left py-3 pr-6 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Panjang</th>
+              <th class="text-left py-3 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Cocok untuk</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-600">
+            <tr class="border-b border-neutral-100">
+              <td class="py-3 pr-6 font-medium text-neutral-950">S</td>
+              <td class="py-3 pr-6">52–54 cm</td>
+              <td class="py-3 pr-6">60 cm</td>
+              <td class="py-3">Kepala kecil, ciput tipis</td>
+            </tr>
+            <tr class="border-b border-neutral-100">
+              <td class="py-3 pr-6 font-medium text-neutral-950">M</td>
+              <td class="py-3 pr-6">54–57 cm</td>
+              <td class="py-3 pr-6">65 cm</td>
+              <td class="py-3">Ukuran rata-rata, cocok sebagian besar</td>
+            </tr>
+            <tr class="border-b border-neutral-100">
+              <td class="py-3 pr-6 font-medium text-neutral-950">L</td>
+              <td class="py-3 pr-6">57–60 cm</td>
+              <td class="py-3 pr-6">70 cm</td>
+              <td class="py-3">Kepala besar, rambut panjang tebal</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 font-medium text-neutral-950">XL</td>
+              <td class="py-3 pr-6">60+ cm</td>
+              <td class="py-3 pr-6">75 cm</td>
+              <td class="py-3">Lingkar kepala ekstra besar</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Table: Pashmina -->
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-lg font-light tracking-wide text-neutral-950">Hijab Pashmina</h2>
+        <a href={url('/koleksi/pashmina')} class="text-[10px] tracking-widest uppercase text-neutral-400 border-b border-neutral-200 pb-0.5 hover:text-neutral-950 transition-colors">
+          Lihat Koleksi →
+        </a>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-neutral-200">
+              <th class="text-left py-3 pr-6 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Tipe</th>
+              <th class="text-left py-3 pr-6 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Panjang</th>
+              <th class="text-left py-3 pr-6 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Lebar</th>
+              <th class="text-left py-3 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Cocok untuk</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-600">
+            <tr class="border-b border-neutral-100">
+              <td class="py-3 pr-6 font-medium text-neutral-950">Standard</td>
+              <td class="py-3 pr-6">175 cm</td>
+              <td class="py-3 pr-6">75 cm</td>
+              <td class="py-3">Semua gaya dasar, pemakaian sehari-hari</td>
+            </tr>
+            <tr class="border-b border-neutral-100">
+              <td class="py-3 pr-6 font-medium text-neutral-950">Long</td>
+              <td class="py-3 pr-6">200 cm</td>
+              <td class="py-3 pr-6">80 cm</td>
+              <td class="py-3">Chest cover penuh, gaya formal, draping</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 font-medium text-neutral-950">Petite</td>
+              <td class="py-3 pr-6">150 cm</td>
+              <td class="py-3 pr-6">65 cm</td>
+              <td class="py-3">Simple wrap sehari-hari, tubuh mungil</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Table: Bergo -->
+    <section class="mb-14">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-lg font-light tracking-wide text-neutral-950">Hijab Bergo</h2>
+        <a href={url('/koleksi/bergo')} class="text-[10px] tracking-widest uppercase text-neutral-400 border-b border-neutral-200 pb-0.5 hover:text-neutral-950 transition-colors">
+          Lihat Koleksi →
+        </a>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-neutral-200">
+              <th class="text-left py-3 pr-6 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Ukuran</th>
+              <th class="text-left py-3 pr-6 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Lingkar Kepala</th>
+              <th class="text-left py-3 pr-6 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Panjang</th>
+              <th class="text-left py-3 text-[10px] tracking-[0.3em] uppercase text-neutral-400 font-normal">Cocok untuk</th>
+            </tr>
+          </thead>
+          <tbody class="text-neutral-600">
+            <tr class="border-b border-neutral-100">
+              <td class="py-3 pr-6 font-medium text-neutral-950">S/M</td>
+              <td class="py-3 pr-6">52–56 cm</td>
+              <td class="py-3 pr-6">75 cm</td>
+              <td class="py-3">Aktivitas ringan–sedang, harian</td>
+            </tr>
+            <tr class="border-b border-neutral-100">
+              <td class="py-3 pr-6 font-medium text-neutral-950">L/XL</td>
+              <td class="py-3 pr-6">56–62 cm</td>
+              <td class="py-3 pr-6">85 cm</td>
+              <td class="py-3">Aktivitas aktif, coverage lebih panjang</td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-6 font-medium text-neutral-950">XXL</td>
+              <td class="py-3 pr-6">62+ cm</td>
+              <td class="py-3 pr-6">90 cm</td>
+              <td class="py-3">Lingkar kepala besar, jubah</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tips -->
+    <div class="border-t border-neutral-100 pt-10">
+      <h2 class="text-base font-medium tracking-wide text-neutral-950 mb-5">Tips Tambahan</h2>
+      <ul class="space-y-3 text-sm text-neutral-600">
+        <li class="flex gap-3">
+          <span class="text-neutral-300 shrink-0">—</span>
+          <span>Jika ragu antara dua ukuran, pilih yang lebih besar — lebih mudah menyesuaikan ukuran yang sedikit besar daripada yang terlalu kecil.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-neutral-300 shrink-0">—</span>
+          <span>Bahan jersey dan kaos memiliki stretch alami, sehingga satu ukuran bisa cocok untuk rentang lingkar kepala yang lebih lebar.</span>
+        </li>
+        <li class="flex gap-3">
+          <span class="text-neutral-300 shrink-0">—</span>
+          <span>Untuk pashmina yang dipakai dengan peniti atau jarum, panjang ekstra memberi lebih banyak kebebasan dalam bereksperimen dengan berbagai gaya.</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

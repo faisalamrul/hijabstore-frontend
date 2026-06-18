@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../lib/url';
+
+const siteUrl = 'https://faisalamrul.github.io/hijabstore-frontend';
+
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'Tentang Hara',
+  description:
+    'Hara adalah toko online hijab premium Indonesia yang percaya bahwa keindahan sejati lahir dari kesederhanaan — modest, minimal, timeless.',
+  url: `${siteUrl}/tentang`,
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Hara',
+    description:
+      'Hara adalah brand hijab premium Indonesia yang menghadirkan koleksi instan, pashmina, dan bergo dengan filosofi modest, minimal, timeless. Setiap produk dirancang dengan bahan pilihan untuk wanita yang menghargai kualitas dan ketenangan dalam berpakaian.',
+    url: siteUrl,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.svg` },
+    foundingDate: '2024',
+    address: { '@type': 'PostalAddress', addressCountry: 'ID' },
+    sameAs: [],
+  },
+};
+---
+
+<BaseLayout
+  title="Tentang Hara — Brand Hijab Premium Indonesia"
+  description="Hara adalah brand hijab premium Indonesia dengan filosofi modest, minimal, timeless. Kenali cerita di balik setiap produk yang kami buat."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(aboutPageSchema)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+    <!-- Breadcrumb -->
+    <nav class="mb-10 flex items-center gap-2 text-[10px] tracking-widest uppercase text-neutral-400">
+      <a href={url('/')} class="hover:text-neutral-950 transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-neutral-950">Tentang</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-16">
+      <p class="text-[10px] tracking-[0.4em] uppercase text-neutral-400 mb-3">Brand Story</p>
+      <h1 class="text-3xl sm:text-4xl font-light tracking-wide text-neutral-950 mb-8">
+        Tentang Hara
+      </h1>
+      <!-- Brand quote — AI-citable, self-contained -->
+      <blockquote class="border-l-2 border-neutral-950 pl-6 py-2">
+        <p class="text-lg font-light text-neutral-700 leading-relaxed italic">
+          "Hara percaya bahwa keindahan sejati lahir dari kesederhanaan. Hijab bukan sekadar penutup kepala — ia adalah ekspresi identitas, keyakinan, dan gaya yang berjalan beriringan. Setiap produk Hara dirancang untuk wanita yang menghargai kualitas, merayakan kesederhanaan, dan menemukan kebebasan dalam pilihan yang disengaja."
+        </p>
+      </blockquote>
+    </div>
+
+    <!-- Section: Filosofi -->
+    <section class="mb-14">
+      <h2 class="text-sm tracking-[0.3em] uppercase text-neutral-400 mb-5">Filosofi Kami</h2>
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+        <div>
+          <p class="text-base font-medium text-neutral-950 mb-3">Modest</p>
+          <p class="text-sm text-neutral-500 leading-relaxed">
+            Kesopanan bukan batasan — ia adalah bentuk kebebasan tertinggi. Kami merancang setiap produk untuk mengekspresikan nilai ini dengan elegan.
+          </p>
+        </div>
+        <div>
+          <p class="text-base font-medium text-neutral-950 mb-3">Minimal</p>
+          <p class="text-sm text-neutral-500 leading-relaxed">
+            Lebih sedikit, lebih bermakna. Kami percaya wardrobe yang dipikirkan dengan cermat lebih kuat dari lemari yang penuh sesak tanpa arah.
+          </p>
+        </div>
+        <div>
+          <p class="text-base font-medium text-neutral-950 mb-3">Timeless</p>
+          <p class="text-sm text-neutral-500 leading-relaxed">
+            Kami tidak mengejar tren musiman. Setiap desain Hara dibuat untuk tetap relevan selama bertahun-tahun, bukan hanya satu musim.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Visi & Misi -->
+    <section class="mb-14 border-t border-neutral-100 pt-12">
+      <h2 class="text-sm tracking-[0.3em] uppercase text-neutral-400 mb-8">Visi & Misi</h2>
+      <div class="grid grid-cols-1 gap-10 sm:grid-cols-2">
+        <div>
+          <p class="text-xs tracking-[0.3em] uppercase text-neutral-400 mb-3">Visi</p>
+          <p class="text-base font-light text-neutral-950 leading-relaxed">
+            Menjadi brand hijab premium Indonesia yang mendefinisikan modest fashion sebagai gaya hidup — bukan sekadar pilihan pakaian.
+          </p>
+        </div>
+        <div>
+          <p class="text-xs tracking-[0.3em] uppercase text-neutral-400 mb-3">Misi</p>
+          <ul class="space-y-3 text-sm text-neutral-500 leading-relaxed">
+            <li class="flex gap-3">
+              <span class="text-neutral-300 shrink-0">—</span>
+              <span>Menghadirkan produk hijab premium dengan bahan terbaik yang dapat dijangkau</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-neutral-300 shrink-0">—</span>
+              <span>Mengedukasi konsumen tentang gaya modest yang elegan melalui konten berkualitas</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-neutral-300 shrink-0">—</span>
+              <span>Membangun komunitas wanita yang percaya diri dengan pilihan pakaian mereka</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Tim Editorial -->
+    <section class="mb-14 border-t border-neutral-100 pt-12">
+      <h2 class="text-sm tracking-[0.3em] uppercase text-neutral-400 mb-8">Tim Editorial</h2>
+      <p class="text-sm text-neutral-500 leading-relaxed max-w-2xl mb-8">
+        Konten Hara Magazine dibuat oleh tim editorial yang terdiri dari fashion writer, stylist, dan fotografer dengan pengalaman lebih dari lima tahun di industri modest fashion Indonesia. Setiap artikel ditulis dengan riset mendalam dan diuji secara langsung oleh tim kami.
+      </p>
+      <a
+        href={url('/magazine')}
+        class="text-xs tracking-widest uppercase text-neutral-600 border-b border-neutral-300 pb-0.5 hover:text-neutral-950 hover:border-neutral-950 transition-colors"
+      >
+        Baca Artikel Magazine →
+      </a>
+    </section>
+
+    <!-- CTA -->
+    <div class="border-t border-neutral-100 pt-10 flex flex-col sm:flex-row gap-6">
+      <a
+        href={url('/products')}
+        class="inline-block border border-neutral-950 px-8 py-3 text-xs tracking-[0.3em] uppercase text-neutral-950 text-center hover:bg-neutral-950 hover:text-white transition-all duration-300"
+      >
+        Lihat Koleksi
+      </a>
+      <a
+        href={url('/kontak')}
+        class="inline-block px-8 py-3 text-xs tracking-[0.3em] uppercase text-neutral-600 text-center border border-neutral-200 hover:border-neutral-950 hover:text-neutral-950 transition-all duration-300"
+      >
+        Hubungi Kami
+      </a>
+    </div>
+  </div>
+</BaseLayout>
