@@ -6,7 +6,13 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://faisalamrul.github.io',
   base: '/hijabstore-frontend',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      lastmod: new Date(),
+      changefreq: 'weekly',
+      priority: 0.8,
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

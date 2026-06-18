@@ -1,0 +1,22 @@
+# Hara
+> Brand hijab premium Indonesia dengan filosofi Modest. Minimal. Timeless. Koleksi meliputi Hijab Instan, Pashmina, dan Bergo untuk wanita yang menghargai kesederhanaan dan kualitas.
+
+## Koleksi Produk
+- [Semua Produk](https://faisalamrul.github.io/hijabstore-frontend/products): Koleksi lengkap hijab Instan, Pashmina, dan Bergo
+- [Hijab Instan](https://faisalamrul.github.io/hijabstore-frontend/products?category=instan): Praktis dan cepat untuk penggunaan sehari-hari
+- [Pashmina](https://faisalamrul.github.io/hijabstore-frontend/products?category=pashmina): Elegan dan versatile untuk semua momen
+- [Bergo](https://faisalamrul.github.io/hijabstore-frontend/products?category=bergo): Nyaman untuk aktivitas sehari-hari
+
+## Magazine — Panduan & Inspirasi Modest Fashion
+- [Panduan Padu Padan Monokrom](https://faisalamrul.github.io/hijabstore-frontend/magazine/panduan-padu-padan-hijab-monokrom): Cara membangun tampilan monokrom minimalis yang elegan
+- [5 Gaya Pashmina](https://faisalamrul.github.io/hijabstore-frontend/magazine/tutorial-hijab-pashmina-5-gaya): Tutorial step-by-step dari casual hingga formal
+- [Tren Modest Fashion 2025](https://faisalamrul.github.io/hijabstore-frontend/magazine/tren-hijab-modest-fashion-2025): Analisis tren minimalis yang mendominasi industri fashion
+- [Cara Merawat Hijab](https://faisalamrul.github.io/hijabstore-frontend/magazine/cara-merawat-hijab-agar-tahan-lama): Panduan perawatan berdasarkan jenis bahan
+- [Capsule Wardrobe Hijab](https://faisalamrul.github.io/hijabstore-frontend/magazine/membangun-capsule-wardrobe-hijab): 10 piece esensial untuk wardrobe efisien
+- [Hijab untuk Outdoor](https://faisalamrul.github.io/hijabstore-frontend/magazine/hijab-untuk-aktivitas-outdoor): Material dan gaya untuk aktivitas luar ruangan
+
+## Tentang Hara
+- Brand hijab premium berbasis di Indonesia
+- Kategori produk: Instan, Pashmina, Bergo
+- Rentang harga: Rp 75.000 – Rp 179.000
+- Filosofi: keindahan sejati hadir dari kesederhanaan
