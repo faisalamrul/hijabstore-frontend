@@ -10,6 +10,22 @@ import { url } from '../lib/url';
 const featured = getFeaturedProducts().slice(0, 6);
 const magazinePosts = posts.slice(0, 3);
 
+const siteUrl = 'https://faisalamrul.github.io/hijabstore-frontend';
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Koleksi Hijab Premium Hara',
+  description: 'Pilihan hijab premium Hara — Instan, Pashmina, dan Bergo untuk berbagai kesempatan.',
+  url: siteUrl,
+  itemListElement: featured.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.name,
+    url: `${siteUrl}/products/${p.slug}`,
+    image: p.images[0],
+  })),
+};
+
 const slides = [
   {
     image: 'https://images.unsplash.com/photo-1661254601903-0edfe1cd736c?w=1600&h=900&fit=crop&crop=faces,center&q=85',
@@ -39,6 +55,9 @@ const slides = [
   title="Hara — Koleksi Hijab Premium Indonesia"
   description="Temukan koleksi hijab premium Hara — Instan, Pashmina, dan Bergo. Modest. Minimal. Timeless."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  </Fragment>
   <!-- Hero Carousel -->
   <section class="relative w-full overflow-hidden" style="height: 65vh; min-height: 400px; max-height: 600px;">
     <!-- Slides -->

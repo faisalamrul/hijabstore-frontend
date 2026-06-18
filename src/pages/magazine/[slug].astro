@@ -48,7 +48,12 @@ const articleSchema = {
   headline: post.title,
   description: post.excerpt,
   image: post.image,
-  author: { '@type': 'Organization', name: post.author },
+  author: {
+    '@type': 'Person',
+    name: 'Tim Editorial Hara',
+    jobTitle: 'Fashion Editor',
+    worksFor: { '@type': 'Organization', name: 'Hara' },
+  },
   publisher: {
     '@type': 'Organization',
     name: 'Hara',
@@ -57,6 +62,18 @@ const articleSchema = {
   datePublished: post.publishedAt,
   url: `${siteUrl}/magazine/${post.slug}`,
 };
+
+const faqSchema = post.faqs
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: post.faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+      })),
+    }
+  : null;
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -73,6 +90,7 @@ const breadcrumbSchema = {
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
   </Fragment>
   <!-- Breadcrumb -->
   <div class="mx-auto max-w-7xl px-4 pt-6 pb-2 sm:px-6 lg:px-8">
@@ -140,6 +158,24 @@ const breadcrumbSchema = {
 
         <!-- Body -->
         <div class="prose-hara" set:html={htmlContent} />
+
+        <!-- FAQ Section -->
+        {post.faqs && (
+          <div class="mt-12 pt-10 border-t border-neutral-100">
+            <p class="text-[9px] tracking-[0.4em] uppercase text-neutral-400 mb-2">FAQ</p>
+            <h2 class="text-lg font-light tracking-wide text-neutral-950 mb-8">
+              Pertanyaan yang Sering Ditanyakan
+            </h2>
+            <dl class="space-y-6">
+              {post.faqs.map((faq) => (
+                <div class="border-b border-neutral-100 pb-6">
+                  <dt class="text-sm font-medium text-neutral-950 mb-2">{faq.question}</dt>
+                  <dd class="text-sm text-neutral-500 leading-relaxed">{faq.answer}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
 
         <!-- Back link -->
         <div class="mt-12 pt-8 border-t border-neutral-100">
