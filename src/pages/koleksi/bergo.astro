@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { getProductsByCategory } from '../../data/products';
+import { url } from '../../lib/url';
+
+const products = getProductsByCategory('bergo');
+const siteUrl = 'https://faisalamrul.github.io/hijabstore-frontend';
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Hijab Bergo Premium — Koleksi Hara',
+  description:
+    'Koleksi hijab bergo premium Hara. Desain one-piece tanpa jarum, cocok untuk aktivitas sehari-hari dan gaya hidup aktif dengan tetap tampil stylish.',
+  url: `${siteUrl}/koleksi/bergo`,
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Koleksi Bergo', item: `${siteUrl}/koleksi/bergo` },
+    ],
+  },
+  mainEntity: {
+    '@type': 'ItemList',
+    name: 'Hijab Bergo Hara',
+    itemListElement: products.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.name,
+      url: `${siteUrl}/products/${p.slug}`,
+      image: p.images[0],
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title="Hijab Bergo Premium — Koleksi Hara"
+  description="Koleksi hijab bergo premium Hara. Desain one-piece tanpa jarum, cocok untuk aktivitas sehari-hari dan gaya hidup aktif dengan tetap tampil stylish."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
+    <!-- Breadcrumb -->
+    <nav class="mb-10 flex items-center gap-2 text-[10px] tracking-widest uppercase text-neutral-400">
+      <a href={url('/')} class="hover:text-neutral-950 transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-neutral-950">Bergo</span>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-12 max-w-2xl">
+      <p class="text-[10px] tracking-[0.4em] uppercase text-neutral-400 mb-3">Koleksi</p>
+      <h1 class="text-3xl sm:text-4xl font-light tracking-wide text-neutral-950 mb-6">
+        Hijab Bergo Premium
+      </h1>
+      <p class="text-base text-neutral-500 leading-relaxed">
+        Bergo adalah hijab one-piece yang menutup kepala hingga bahu tanpa memerlukan jarum pentul — solusi terpraktis untuk gaya hidup modern yang aktif. Koleksi bergo Hara tersedia dalam jersey daily yang nyaman untuk penggunaan sehari-hari, kaos stretch yang fleksibel, hingga bergo premium dengan detail finishing yang rapi untuk tampilan lebih formal. Pilihan sempurna untuk bepergian, berolahraga, atau sekadar rutinitas harian.
+      </p>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
+      {products.map((product) => <ProductCard product={product} />)}
+    </div>
+
+    <!-- Cross-link to magazine -->
+    <div class="mt-16 border-t border-neutral-100 pt-10">
+      <p class="text-[10px] tracking-[0.4em] uppercase text-neutral-400 mb-3">Tips</p>
+      <p class="text-sm text-neutral-600 mb-4">
+        Cari tahu hijab terbaik untuk berbagai aktivitas outdoor — dari hiking hingga city walk.
+      </p>
+      <a
+        href={url('/magazine/hijab-untuk-aktivitas-outdoor')}
+        class="text-xs tracking-widest uppercase text-neutral-600 border-b border-neutral-300 pb-0.5 hover:text-neutral-950 hover:border-neutral-950 transition-colors"
+      >
+        Hijab untuk Aktivitas Outdoor →
+      </a>
+    </div>
+  </div>
+</BaseLayout>
