@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://faisalamrul.github.io/hijabstore-frontend/sitemap-index.xml

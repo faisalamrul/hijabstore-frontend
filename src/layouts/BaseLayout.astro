@@ -6,9 +6,29 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
 }
 
-const { title, description = 'Hara — Modest. Minimal. Timeless.' } = Astro.props;
+const {
+  title,
+  description = 'Hara — Koleksi hijab premium Indonesia. Modest. Minimal. Timeless.',
+  ogImage = 'https://images.unsplash.com/photo-1661254601903-0edfe1cd736c?fit=crop&w=1200&h=630&q=85',
+  ogType = 'website',
+} = Astro.props;
+
+const siteUrl = 'https://faisalamrul.github.io/hijabstore-frontend';
+const canonicalURL = Astro.url.href;
+const pageTitle = title.includes('Hara') ? title : `${title} — Hara`;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Hara',
+  url: siteUrl,
+  description: 'Koleksi hijab premium Indonesia — Modest. Minimal. Timeless.',
+  logo: `${siteUrl}/favicon.svg`,
+};
 ---
 
 <!doctype html>
@@ -16,9 +36,38 @@ const { title, description = 'Hara — Modest. Minimal. Timeless.' } = Astro.pro
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary meta -->
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <title>{title} — Hara</title>
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Hara" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Organization JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+
+    <!-- Per-page JSON-LD (injected by individual pages) -->
+    <slot name="head" />
   </head>
   <body class="bg-stone-50 text-neutral-950 antialiased">
     <Header />
